@@ -27,7 +27,11 @@ public class ArticleController {
 	public ArticleForm setUpArticleForm() {
 		return new ArticleForm();
 	}
-	
+	/**
+	 * 
+	 * @param model 投稿情報
+	 * @return トップ画面
+	 */
 	@RequestMapping("")
 	public String index(Model model) {
 		List<Article> articleList = articleService.findAll();
@@ -35,9 +39,14 @@ public class ArticleController {
 		
 		return "bbs";
 	}
-	
+	/**
+	 * 
+	 * @param form 投稿するパラメータ
+	 * @param model
+	 * @return トップ画面へリダイレクト
+	 */
 	@RequestMapping("/post")
-	public String post(ArticleForm form, Model model) {
+	public String insertArticle(ArticleForm form, Model model) {
 		Article article = new Article();
 		/*test
 		form.setName("user1");
