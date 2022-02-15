@@ -42,7 +42,6 @@ public class ArticleController {
 		/*test
 		form.setName("user1");
 		form.setContent("ahhhh");
-		Article article = new Article();
 		article.setName("user");
 		article.setContent("hello World");
 		*/
@@ -50,6 +49,6 @@ public class ArticleController {
 		article.setContent(form.getContent());
 		articleService.insert(article);
 		
-		return index(model);
+		return "redirect:/bbs";
 	}
 }

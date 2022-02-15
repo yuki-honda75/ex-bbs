@@ -5,9 +5,21 @@
 <title>掲示板システム</title>
 </head>
 <body>
+  <form action="bbs.html" th:action="@{/bbs/post}" th:object="${articleForm}" method="post">
+    <div>
+	    <label for="name">投稿者名：</label>
+	    <input id="name" name="name" th:field="*{name}">
+    </div>
+    <div>
+	    <label for="content">投稿内容：</label>
+	    <textarea id="content" name="content" th:field="*{content}" rows="4" cols="30"></textarea>
+    </div>
+    <button type="submit">記事投稿</button>
+  </form>
+  <hr>
   <div th:each="article : ${articleList}">
     <p>投稿者名：<span th:text="${article.name}">dummy</span></p>
-    <p>業務内容：</p>
+    <p>投稿内容：</p>
     <pre th:text="${article.content}"></pre>
     <hr>
   </div>
