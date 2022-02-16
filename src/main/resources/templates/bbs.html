@@ -9,16 +9,19 @@
   <form action="bbs.html" th:action="@{/bbs/postArticle}" th:object="${articleForm}" method="post">
     <div>
 	    <label for="name">投稿者名：</label>
-	    <input id="name" name="name" th:field="*{name}">
+	    <input id="name" name="name" th:field="*{name}"><br>
+	    <span class="error" th:errors="*{name}"></span>
     </div>
     <div>
-	    <label for="content">投稿内容：</label>
-	    <textarea id="content" name="content" th:field="*{content}" rows="4" cols="30"></textarea>
+	    <label for="content">投稿内容：</label><br>
+	    <textarea id="content" name="content" th:field="*{content}" rows="4" cols="30"></textarea><br>
+	    <span class="error" th:errors="*{content}"></span>
     </div>
     <button type="submit">記事投稿</button>
   </form>
+  
   <hr>
-  <div th:each="article : ${articleList}">
+  <div th:each="article,status : ${articleList}">
     <p>投稿者名：<span th:text="${article.name}">dummy</span></p>
     <p>投稿内容：</p>
     <pre th:text="${article.content}"></pre>
@@ -28,16 +31,19 @@
       <p>コメント者名：<span th:text="${comment.name}">dummy</span></p>
       <p>コメント内容：</p>
       <pre th:text="${comment.content}"></pre>
-    </div>
     <p th:if="${#lists.isEmpty(article.commentList)}">
       コメントはまだありません。
     </p>
+    </div>
     
     <form action="bbs.html" th:action="@{/bbs/postComment}" th:object="${commentForm}" method="post">
       <label for="commenter">名前：</label><br>
       <input id="commenter" name="name" th:field="*{name}"><br>
+      <span th:if="${formId == status.index}" class="error" th:errors="*{name}"></span><br>
       <label for="comment">コメント：</label><br>
-      <textarea id="comment" name="content" th:field="*{content}" rows="4" cols="30"></textarea>
+      <textarea id="comment" name="content" th:field="*{content}" rows="4" cols="30"></textarea><br>
+      <span th:if="${formId == status.index}" class="error" th:errors="*{content}"></span>
+      <input type="hidden" name="formId" th:value="${status.index}">
       <input type="hidden" name="articleId" th:value="${article.id}"><br>
       <button type="submit">コメント投稿</button>
     </form>

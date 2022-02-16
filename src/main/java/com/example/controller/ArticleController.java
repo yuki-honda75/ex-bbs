@@ -92,10 +92,12 @@ public class ArticleController {
 	 */
 	@RequestMapping("/postComment")
 	public String insertComment(
+			Integer formId,
 			@Validated CommentForm form,
 			BindingResult result,
 			Model model) {
 		if (result.hasErrors()) {
+			model.addAttribute("formId", formId);
 			return index(model);
 		}
 		Comment comment = new Comment();
