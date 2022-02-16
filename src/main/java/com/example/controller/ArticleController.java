@@ -93,8 +93,8 @@ public class ArticleController {
 	
 	@RequestMapping("/deleteArticle")
 	public String deleteArticle(Integer id) {
-		articleService.deleteById(id);
 		commentService.deleteByArticleId(id);
+		articleService.deleteById(id);
 		
 		return "redirect:/bbs";
 	}

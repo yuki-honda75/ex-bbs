@@ -21,6 +21,7 @@
     <p>投稿者名：<span th:text="${article.name}">dummy</span></p>
     <p>投稿内容：</p>
     <pre th:text="${article.content}"></pre>
+    <a th:href="@{/bbs/deleteArticle?id=} + ${article.id}"><button>記事削除</button></a>
     <div th:each="comment : ${article.commentList}">
       <p>コメント者名：<span th:text="${comment.name}">dummy</span></p>
       <p>コメント内容：</p>
