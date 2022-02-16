@@ -75,7 +75,11 @@ public class ArticleController {
 		
 		return "redirect:/bbs";
 	}
-	
+	/**
+	 * 
+	 * @param form コメント入力情報
+	 * @return トップ画面へリダイレクト
+	 */
 	@RequestMapping("/postComment")
 	public String insertComment(CommentForm form) {
 		Comment comment = new Comment();
@@ -83,6 +87,14 @@ public class ArticleController {
 		comment.setName(form.getName());
 		comment.setContent(form.getContent());
 		commentService.insert(comment);
+		
+		return "redirect:/bbs";
+	}
+	
+	@RequestMapping("/deleteArticle")
+	public String deleteArticle(Integer id) {
+		commentService.deleteByArticleId(id);
+		articleService.deleteById(id);
 		
 		return "redirect:/bbs";
 	}

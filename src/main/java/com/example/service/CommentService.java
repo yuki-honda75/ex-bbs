@@ -32,4 +32,11 @@ public class CommentService {
 	public void insert(Comment comment) {
 		commentRepository.insert(comment);
 	}
+	/**
+	 * 
+	 * @param articleId 記事ID
+	 */
+	public void deleteByArticleId(int articleId) {
+		commentRepository.deleteByArticleId(articleId);
+	}
 }

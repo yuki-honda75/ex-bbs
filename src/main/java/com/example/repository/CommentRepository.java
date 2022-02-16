@@ -50,4 +50,14 @@ public class CommentRepository {
 		
 		template.update(sql, param);
 	}
+	/**
+	 * 
+	 * @param articleId 記事ID
+	 */
+	public void deleteByArticleId(int articleId) {
+		String sql = "delete from comments where article_id=:articleId";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("articleId", articleId);
+		
+		template.update(sql, param);
+	}
 }
