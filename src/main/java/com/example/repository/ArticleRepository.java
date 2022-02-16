@@ -23,20 +23,36 @@ public class ArticleRepository {
 	
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
+	/**
+	 * 
+	 * @return 記事一覧
+	 */
 	public List<Article> findAll() {
 		String sql = "select * from articles order by id desc";
 		List<Article> articleList = template.query(sql, ARTICLE_ROW_MAPPER);
 		
 		return articleList;
 	}
-	
+	/**
+	 * 
+	 * @param article 記事情報
+	 */
 	public void insert(Article article) {
 		String sql = "insert into articles"
 				+ "       ( name,  content)"
 				+ " values(:name, :content)";
 		SqlParameterSource param = new MapSqlParameterSource()
 				.addValue("name", article.getName()).addValue("content", article.getContent());
+		
+		template.update(sql, param);
+	}
+	/**
+	 * 
+	 * @param id 記事ID
+	 */
+	public void deleteById(int id) {
+		String sql = "delete form articles where id=:id";
+		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		
 		template.update(sql, param);
 	}
