@@ -92,8 +92,9 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("/deleteArticle")
-	public String deleteArticle(ArticleForm form) {
-		//articleService.deleteById(13);
+	public String deleteArticle(Integer id) {
+		articleService.deleteById(id);
+		commentService.deleteByArticleId(id);
 		
 		return "redirect:/bbs";
 	}
