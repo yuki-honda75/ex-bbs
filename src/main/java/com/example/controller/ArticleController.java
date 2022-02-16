@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.domain.Article;
+import com.example.domain.Comment;
 import com.example.form.ArticleForm;
 import com.example.service.ArticleService;
+import com.example.service.CommentService;
 
 /**
  * 
@@ -22,6 +25,9 @@ import com.example.service.ArticleService;
 public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@ModelAttribute
 	public ArticleForm setUpArticleForm() {
@@ -35,6 +41,10 @@ public class ArticleController {
 	@RequestMapping("")
 	public String index(Model model) {
 		List<Article> articleList = articleService.findAll();
+		for (Article article : articleList) {
+			List<Comment> commentList = commentService.findByArticleId(article.getId());
+			article.setCommentList(commentList);
+		}
 		model.addAttribute("articleList", articleList);
 		
 		return "bbs";

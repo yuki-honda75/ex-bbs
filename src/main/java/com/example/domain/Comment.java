@@ -1,21 +1,20 @@
 package com.example.domain;
 
-import java.util.List;
-
 /**
  * 
- * @author hondayuki
+ * @author pupi_
  *
  */
-public class Article {
+public class Comment {
 	/** ID */
 	private Integer id;
 	/** 名前 */
 	private String name;
 	/** 内容 */
 	private String content;
-	/** コメントリスト */
-	private List<Comment> commentList;
+	/** 記事ID */
+	private Integer articleId;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -34,18 +33,16 @@ public class Article {
 	public void setContent(String content) {
 		this.content = content;
 	}
-	public List<Comment> getCommentList() {
-		return commentList;
+	public Integer getArticleId() {
+		return articleId;
 	}
-	public void setCommentList(List<Comment> commentList) {
-		this.commentList = commentList;
+	public void setArticleId(Integer articleId) {
+		this.articleId = articleId;
 	}
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", name=" + name
-				+ ", content=" + content + ", commentList="
-				+ commentList + "]";
+		return "Comment [id=" + id + ", name=" + name
+				+ ", content=" + content + ", articleId="
+				+ articleId + "]";
 	}
-	
-	
 }
