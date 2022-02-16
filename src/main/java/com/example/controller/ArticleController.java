@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -63,7 +65,13 @@ public class ArticleController {
 	 * @return トップ画面へリダイレクト
 	 */
 	@RequestMapping("/postArticle")
-	public String insertArticle(ArticleForm form) {
+	public String insertArticle(
+			@Validated ArticleForm form, 
+			BindingResult result, 
+			Model model) {
+		if (result.hasErrors()) {
+			return index(model);
+		}
 		Article article = new Article();
 		/*test
 		form.setName("user1");
@@ -83,7 +91,15 @@ public class ArticleController {
 	 * @return トップ画面へリダイレクト
 	 */
 	@RequestMapping("/postComment")
-	public String insertComment(CommentForm form) {
+	public String insertComment(
+			Integer formId,
+			@Validated CommentForm form,
+			BindingResult result,
+			Model model) {
+		if (result.hasErrors()) {
+			model.addAttribute("formId", formId);
+			return index(model);
+		}
 		Comment comment = new Comment();
 		comment.setArticleId(Integer.parseInt(form.getArticleId()));
 		comment.setName(form.getName());

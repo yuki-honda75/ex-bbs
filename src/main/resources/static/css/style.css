@@ -1,0 +1,10 @@
+.comment-list {
+	width: 300px;
+	border: solid;
+	border-radius: 8px;
+	margin-top: 4px;
+}
+
+.error {
+	color: red;
+}
