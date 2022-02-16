@@ -51,7 +51,7 @@ public class ArticleRepository {
 	 * @param id 記事ID
 	 */
 	public void deleteById(int id) {
-		String sql = "delete form articles where id=:id";
+		String sql = "delete from articles where id=:id";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("id", id);
 		
 		template.update(sql, param);
