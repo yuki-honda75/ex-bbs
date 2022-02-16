@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.domain.Article;
 import com.example.domain.Comment;
 import com.example.form.ArticleForm;
+import com.example.form.CommentForm;
 import com.example.service.ArticleService;
 import com.example.service.CommentService;
 
@@ -32,6 +32,11 @@ public class ArticleController {
 	@ModelAttribute
 	public ArticleForm setUpArticleForm() {
 		return new ArticleForm();
+	}
+	
+	@ModelAttribute
+	public CommentForm setUpCommentForm() {
+		return new CommentForm();
 	}
 	/**
 	 * 
@@ -55,8 +60,8 @@ public class ArticleController {
 	 * @param model
 	 * @return トップ画面へリダイレクト
 	 */
-	@RequestMapping("/post")
-	public String insertArticle(ArticleForm form, Model model) {
+	@RequestMapping("/postArticle")
+	public String insertArticle(ArticleForm form) {
 		Article article = new Article();
 		/*test
 		form.setName("user1");
@@ -67,6 +72,17 @@ public class ArticleController {
 		article.setName(form.getName());
 		article.setContent(form.getContent());
 		articleService.insert(article);
+		
+		return "redirect:/bbs";
+	}
+	
+	@RequestMapping("/postComment")
+	public String insertComment(CommentForm form) {
+		Comment comment = new Comment();
+		comment.setArticleId(Integer.parseInt(form.getArticleId()));
+		comment.setName(form.getName());
+		comment.setContent(form.getContent());
+		commentService.insert(comment);
 		
 		return "redirect:/bbs";
 	}

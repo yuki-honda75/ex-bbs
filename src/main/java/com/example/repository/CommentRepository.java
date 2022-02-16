@@ -23,12 +23,31 @@ public class CommentRepository {
 	
 	@Autowired
 	private NamedParameterJdbcTemplate template;
-	
+	/**
+	 * 
+	 * @param articleId 記事ID
+	 * @return 記事IDで検索したコメントリスト
+	 */
 	public List<Comment> findByArticleId(int articleId) {
 		String sql = "select * from comments where article_id=:articleId";
 		SqlParameterSource param = new MapSqlParameterSource().addValue("articleId", articleId);
 		List<Comment> commentList = template.query(sql, param, COMMENT_ROW_MAPPER);
 		
 		return commentList;
+	}
+	/**
+	 * 
+	 * @param comment コメント情報
+	 */
+	public void insert(Comment comment) {
+		String sql = "insert into comments"
+				+ "       ( name,  content, article_id)"
+				+ " values(:name, :content, :articleId)";
+		SqlParameterSource param = new MapSqlParameterSource()
+				.addValue("name", comment.getName())
+				.addValue("content", comment.getContent())
+				.addValue("articleId", comment.getArticleId());
+		
+		template.update(sql, param);
 	}
 }
