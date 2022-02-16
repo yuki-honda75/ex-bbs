@@ -46,10 +46,12 @@ public class ArticleController {
 	@RequestMapping("")
 	public String index(Model model) {
 		List<Article> articleList = articleService.findAll();
+		/**
 		for (Article article : articleList) {
 			List<Comment> commentList = commentService.findByArticleId(article.getId());
 			article.setCommentList(commentList);
 		}
+		*/
 		model.addAttribute("articleList", articleList);
 		
 		return "bbs";

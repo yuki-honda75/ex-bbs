@@ -66,8 +66,8 @@ public class ArticleRepository {
 		//String sql = "select * from articles order by id desc";
 		String sql = "select a.id, a.name, a.content,"
 				+ " c.id as com_id, c.name as com_name, c.content as com_content, c.article_id"
-				+ " from articles as a join comments as c"
-				+ " on a.id = c.article_id";
+				+ " from articles as a left outer join comments as c"
+				+ " on a.id = c.article_id order by a.id desc";
 		List<Article> articleList = template.query(sql, ARTICLE_COMMNT_RESULT_SET_EXTRACTOR);
 		
 		return articleList;
