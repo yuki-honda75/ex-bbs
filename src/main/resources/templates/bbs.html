@@ -22,11 +22,16 @@
     <p>投稿内容：</p>
     <pre th:text="${article.content}"></pre>
     <a th:href="@{/bbs/deleteArticle?id=} + ${article.id}"><button>記事削除</button></a>
+    
     <div th:each="comment : ${article.commentList}">
       <p>コメント者名：<span th:text="${comment.name}">dummy</span></p>
       <p>コメント内容：</p>
       <pre th:text="${comment.content}"></pre>
     </div>
+    <p th:if="${#lists.isEmpty(article.commentList)}">
+      コメントはまだありません。
+    </p>
+    
     <form action="bbs.html" th:action="@{/bbs/postComment}" th:object="${commentForm}" method="post">
       <label for="commenter">名前：</label><br>
       <input id="commenter" name="name" th:field="*{name}"><br>
