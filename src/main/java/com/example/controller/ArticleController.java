@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.example.domain.Article;
 import com.example.domain.Comment;
 import com.example.form.ArticleForm;
+import com.example.form.CommentForm;
 import com.example.service.ArticleService;
 import com.example.service.CommentService;
 
@@ -31,6 +32,11 @@ public class ArticleController {
 	@ModelAttribute
 	public ArticleForm setUpArticleForm() {
 		return new ArticleForm();
+	}
+	
+	@ModelAttribute
+	public CommentForm setUpCommentForm() {
+		return new CommentForm();
 	}
 	/**
 	 * 
@@ -71,7 +77,13 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("/postComment")
-	public String insertComment() {
+	public String insertComment(CommentForm form) {
+		Comment comment = new Comment();
+		comment.setArticleId(Integer.parseInt(form.getArticleId()));
+		comment.setName(form.getName());
+		comment.setContent(form.getContent());
+		commentService.insert(comment);
+		
 		return "redirect:/bbs";
 	}
 }
