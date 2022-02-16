@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>掲示板システム</title>
+<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css">
 </head>
 <body>
   <form action="bbs.html" th:action="@{/bbs/postArticle}" th:object="${articleForm}" method="post">
@@ -23,7 +24,7 @@
     <pre th:text="${article.content}"></pre>
     <a th:href="@{/bbs/deleteArticle?id=} + ${article.id}"><button>記事削除</button></a>
     
-    <div th:each="comment : ${article.commentList}">
+    <div class="comment-list" th:each="comment : ${article.commentList}">
       <p>コメント者名：<span th:text="${comment.name}">dummy</span></p>
       <p>コメント内容：</p>
       <pre th:text="${comment.content}"></pre>
@@ -42,5 +43,8 @@
     </form>
     <hr>
   </div>
+  <p th:if="${#lists.isEmpty(articleList)}">
+    記事はまだありません
+  </p>
 </body>
 </html>
