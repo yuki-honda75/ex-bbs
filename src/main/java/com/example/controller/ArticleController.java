@@ -1,6 +1,5 @@
 package com.example.controller;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,8 +54,8 @@ public class ArticleController {
 	 * @param model
 	 * @return トップ画面へリダイレクト
 	 */
-	@RequestMapping("/post")
-	public String insertArticle(ArticleForm form, Model model) {
+	@RequestMapping("/postArticle")
+	public String insertArticle(ArticleForm form) {
 		Article article = new Article();
 		/*test
 		form.setName("user1");
@@ -68,6 +67,11 @@ public class ArticleController {
 		article.setContent(form.getContent());
 		articleService.insert(article);
 		
+		return "redirect:/bbs";
+	}
+	
+	@RequestMapping("/postComment")
+	public String insertComment() {
 		return "redirect:/bbs";
 	}
 }

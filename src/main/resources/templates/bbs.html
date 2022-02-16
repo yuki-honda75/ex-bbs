@@ -5,7 +5,7 @@
 <title>掲示板システム</title>
 </head>
 <body>
-  <form action="bbs.html" th:action="@{/bbs/post}" th:object="${articleForm}" method="post">
+  <form action="bbs.html" th:action="@{/bbs/postArticle}" th:object="${articleForm}" method="post">
     <div>
 	    <label for="name">投稿者名：</label>
 	    <input id="name" name="name" th:field="*{name}">

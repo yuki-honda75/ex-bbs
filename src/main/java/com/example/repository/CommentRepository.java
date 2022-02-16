@@ -41,10 +41,12 @@ public class CommentRepository {
 	 */
 	public void insert(Comment comment) {
 		String sql = "insert into comments"
-				+ "       ( name,  content)"
-				+ " values(:name, :content)";
+				+ "       ( name,  content, article_id)"
+				+ " values(:name, :content, :articleId)";
 		SqlParameterSource param = new MapSqlParameterSource()
-				.addValue("name", comment.getName()).addValue("content", comment.getContent());
+				.addValue("name", comment.getName())
+				.addValue("content", comment.getContent())
+				.addValue("articleId", comment.getArticleId());
 		
 		template.update(sql, param);
 	}
