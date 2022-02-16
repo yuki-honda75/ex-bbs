@@ -17,8 +17,19 @@ import com.example.repository.CommentRepository;
 public class CommentService {
 	@Autowired
 	private CommentRepository commentRepository;
-	
+	/**
+	 * 
+	 * @param articleId 記事ID
+	 * @return コメントリスト
+	 */
 	public List<Comment> findByArticleId(int articleId) {
 		return commentRepository.findByArticleId(articleId);
+	}
+	/**
+	 * 
+	 * @param comment コメント情報
+	 */
+	public void insert(Comment comment) {
+		commentRepository.insert(comment);
 	}
 }
