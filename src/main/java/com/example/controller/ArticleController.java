@@ -111,7 +111,6 @@ public class ArticleController {
 	
 	@RequestMapping("/deleteArticle")
 	public String deleteArticle(Integer id) {
-		commentService.deleteByArticleId(id);
 		articleService.deleteById(id);
 		
 		return "redirect:/bbs";
